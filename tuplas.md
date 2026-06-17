@@ -1,0 +1,367 @@
+# TUPLAS (VERSIÓN COMPLETA)
+
+## 📑 Tabla de Contenidos
+- [Introducción](#-introducción)
+- [¿Qué es una tupla?](#-qué-es-una-tupla)
+- [Diferencia visual con listas](#diferencia-visual)
+- [¿Por qué existen las tuplas?](#por-qué-existen-las-tuplas)
+- [Acceder a elementos y longitud](#acceder-a-elementos-y-longitud)
+- [Recorrer tuplas](#recorrer-una-tupla)
+- [Operador IN](#operador-in)
+- [Qué NO puedes hacer (inmutabilidad)](#qué-no-puedes-hacer)
+- [Métodos de tuplas](#métodos-de-las-tuplas)
+- [Crear una tupla de un elemento](#crear-una-tupla-de-un-elemento)
+- [Empaquetado (packing) y desempaquetado (unpacking)](#empaquetado-packing-y-desempaquetado-unpacking)
+- [Intercambio de variables](#intercambio-de-variables)
+- [Desempaquetado parcial](#desempaquetado-parcial)
+- [Conversión entre listas y tuplas](#conversión-entre-listas-y-tuplas)
+- [Slicing en tuplas](#slicing-en-tuplas)
+- [Tuplas anidadas](#tuplas-anidadas)
+- [Uso real: devolver varios valores](#uso-real-devolver-varios-valores)
+- [Comparación entre listas y tuplas](#comparación-entre-listas-y-tuplas)
+- [Ventajas de las tuplas](#ventajas-de-las-tuplas)
+- [Funciones útiles](#funciones-útiles)
+- [Errores comunes](#errores-comunes)
+- [Truco profesional](#truco-profesional)
+- [Mini proyecto](#mini-proyecto)
+
+---
+
+## 📌 Introducción
+
+Después de aprender listas, las tuplas son fáciles de entender porque se parecen mucho. La diferencia principal es:
+
+- LISTA → modificable (mutable)
+- TUPLA → inmutable
+
+Una vez creada una tupla, no puedes cambiar sus elementos.
+
+---
+
+## ❓ ¿Qué es una tupla?
+
+Una tupla es una colección ordenada de elementos y se crea usando paréntesis:
+
+```python
+coordenadas = (10, 20)
+
+datos = ("Cristian", 20, 1.75, True)
+```
+
+---
+
+## Diferencia visual
+
+Lista:
+
+```python
+frutas = ["manzana", "pera", "uva"]
+```
+
+Tupla:
+
+```python
+frutas = ("manzana", "pera", "uva")
+```
+
+---
+
+## ¿Por qué existen las tuplas?
+
+Porque hay datos que no deberían cambiar, por ejemplo:
+
+- Coordenadas geográficas
+- Fechas
+- Colores RGB
+- Información fija
+- Resultados de funciones
+
+---
+
+## Acceder a elementos y longitud
+
+Igual que las listas:
+
+```python
+frutas = ("manzana", "pera", "uva")
+print(frutas[0])   # 'manzana'
+print(frutas[-1])  # 'uva'
+print(len(frutas)) # 3
+```
+
+---
+
+## Recorrer una tupla
+
+```python
+for fruta in frutas:
+    print(fruta)
+```
+
+Salida:
+
+```
+manzana
+pera
+uva
+```
+
+---
+
+## Operador IN
+
+```python
+if "pera" in frutas:
+    print("Existe")
+```
+
+---
+
+## Qué NO puedes hacer (inmutabilidad)
+
+Con listas:
+
+```python
+frutas = ["manzana", "pera"]
+frutas[0] = "mango"  # funciona
+```
+
+Con tuplas:
+
+```python
+frutas = ("manzana", "pera")
+frutas[0] = "mango"  # Error: las tuplas son inmutables
+```
+
+---
+
+## Métodos de las tuplas
+
+Tienen pocos métodos:
+
+- `count()` — cuenta apariciones
+
+```python
+numeros = (1, 2, 2, 2, 3)
+print(numeros.count(2))  # 3
+```
+
+- `index()` — busca posición
+
+```python
+numeros.index(3)  # devuelve la posición de 3
+```
+
+---
+
+## Crear una tupla de un elemento
+
+Error común:
+
+```python
+x = (5)   # Esto NO es tupla, es int
+```
+
+Para crear una tupla de un elemento usa la coma:
+
+```python
+x = (5,)
+print(type(x))  # <class 'tuple'>
+```
+
+---
+
+## Empaquetado (Packing)
+
+Python agrupa automáticamente valores:
+
+```python
+datos = 10, 20, 30
+# datos == (10, 20, 30)
+```
+
+---
+
+## Desempaquetado (Unpacking)
+
+```python
+datos = (10, 20, 30)
+a, b, c = datos
+# a=10, b=20, c=30
+```
+
+Mucho más limpio que acceder por índices.
+
+---
+
+## Intercambio de variables
+
+Truco profesional:
+
+```python
+a, b = b, a
+```
+
+Ejemplo:
+
+```python
+a = 10
+b = 20
+a, b = b, a
+# ahora a=20, b=10
+```
+
+---
+
+## Desempaquetado parcial
+
+```python
+datos = (1, 2, 3, 4, 5)
+a, b, *resto = datos
+# a=1, b=2, resto=[3,4,5]
+
+primero, *medio, ultimo = datos
+# primero=1, medio=[2,3,4], ultimo=5
+```
+
+`*resto` recoge lo que sobra.
+
+---
+
+## Conversión entre listas y tuplas
+
+- Lista → Tupla:
+
+```python
+lista = [1, 2, 3]
+tupla = tuple(lista)  # (1,2,3)
+```
+
+- Tupla → Lista:
+
+```python
+tupla = (1, 2, 3)
+lista = list(tupla)    # [1,2,3]
+```
+
+---
+
+## Slicing en tuplas
+
+Funciona igual que en listas/strings:
+
+```python
+numeros = (0,1,2,3,4,5)
+print(numeros[:3])   # (0,1,2)
+print(numeros[2:])   # (2,3,4,5)
+print(numeros[::-1]) # invertir -> (5,4,3,2,1,0)
+```
+
+---
+
+## Tuplas anidadas
+
+```python
+datos = (
+    ("Cristian", 20),
+    ("Ana", 22),
+    ("Luis", 25)
+)
+
+print(datos[1][0])  # 'Ana'
+```
+
+---
+
+## Uso real: devolver varios valores
+
+Muy común en funciones:
+
+```python
+def operaciones(a, b):
+    return a + b, a - b
+
+suma, resta = operaciones(10, 5)
+# suma=15, resta=5
+```
+
+---
+
+## Comparación entre listas y tuplas
+
+Usa listas cuando los datos cambian:
+
+```python
+carrito = ["mouse", "teclado"]
+```
+
+Usa tuplas cuando los datos son fijos:
+
+```python
+coordenada = (10, 20)
+```
+
+---
+
+## Ventajas de las tuplas
+
+- Más seguras (no se modifican accidentalmente)
+- Menor consumo de memoria
+- Más rápidas en algunas operaciones
+
+---
+
+## Funciones útiles
+
+- `max((1,5,3))` → 5
+- `min((1,5,3))` → 1
+- `sum((1,2,3))` → 6
+
+---
+
+## Errores comunes
+
+- `x = (5)` — pensar que es tupla
+- `tupla[0] = 100` — intentar modificar una tupla
+- `a, b = (1, 2, 3)` — número incorrecto de variables en unpacking
+
+---
+
+## Truco profesional
+
+Ignorar valores que no necesitas:
+
+```python
+datos = ("Cristian", 20, "Ingeniería")
+nombre, _, carrera = datos
+# _ se usa por convención para indicar: no voy a usar este valor
+```
+
+---
+
+## Mini proyecto
+
+Guardar coordenadas de varios puntos:
+
+```python
+puntos = [
+    (10, 20),
+    (15, 30),
+    (40, 50)
+]
+
+for x, y in puntos:
+    print(f"X={x}, Y={y}")
+```
+
+Salida:
+
+```
+X=10, Y=20
+X=15, Y=30
+X=40, Y=50
+```
+
+---
+
+**Listo.** Añadí el archivo `tuplas.md` con la versión completa sobre tuplas: definiciones, ejemplos, empaquetado/desempaquetado, conversiones y un mini proyecto.
