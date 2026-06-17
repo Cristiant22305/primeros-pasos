@@ -1,16 +1,31 @@
-# 3. Tipos de datos (int, float, str, bool)
+# 🧾 TIPOS DE DATOS (int, float, str, bool)
 
-Si las variables son cajas, los tipos de datos nos dicen qué hay dentro de la caja.
+## 📑 Tabla de Contenidos
+- [Introducción](#-introducción)
+- [¿Por qué son importantes?](#-por-qué-son-importantes)
+- [1. int (números enteros)](#1-int-números-enteros)
+- [2. float (números decimales)](#2-float-números-decimales)
+- [Diferencia entre int y float](#diferencia-entre-int-y-float)
+- [3. str (texto)](#3-str-texto)
+- [Funciones útiles para strings](#funciones-útiles-para-strings)
+- [4. bool (booleanos)](#4-bool-booleanos)
+- [Cómo saber el tipo: type()](#cómo-saber-el-tipo-type)
+- [Conversiones de tipos](#conversiones-de-tipos)
+- [Error común con input()](#error-común-con-input)
+- [F-strings (muy importantes)](#f-strings-muy-importantes)
+- [Mini proyecto](#mini-proyecto)
+- [Lo que debes dominar](#lo-que-debes-dominar)
+- [Desafío rápido](#desafío-rápido)
 
-No es lo mismo guardar:
+---
 
-- Un número.
-- Un texto.
-- Una respuesta de sí o no.
+## 📌 Introducción
 
-Python necesita saber qué tipo de información está manejando para poder trabajar correctamente.
+Si las variables son cajas, los tipos de datos nos dicen qué hay dentro de la caja. No es lo mismo guardar un número, un texto o una respuesta de sí/no. Python necesita saber qué tipo de información está manejando para operar correctamente.
 
-## ¿Por qué son importantes?
+---
+
+## ❓ ¿Por qué son importantes?
 
 Mira este ejemplo:
 
@@ -18,21 +33,15 @@ Mira este ejemplo:
 edad = 20
 ```
 
-Python entiende:
-
-"edad es un número"
-
-Pero si haces:
+Python entiende: "edad es un número". Pero si hacemos:
 
 ```python
 edad = "20"
 ```
 
-Python entiende:
+Python entiende: "edad es un texto" — aunque para nosotros se vean iguales. Los tipos determinan qué operaciones puedes hacer y cómo las interpreta Python.
 
-"edad es un texto"
-
-Aunque para nosotros se vean iguales.
+---
 
 ## 1. int (números enteros)
 
@@ -58,6 +67,8 @@ print(a + b)
 ```
 15
 ```
+
+---
 
 ## 2. float (números decimales)
 
@@ -103,6 +114,8 @@ print(type(10.0))
 <class 'float'>
 ```
 
+---
+
 ## 3. str (texto)
 
 Todo lo que esté entre comillas es texto.
@@ -112,10 +125,7 @@ nombre = "Cristian"
 apellido = 'Triana'
 ```
 
-Python acepta:
-
-- `"texto"` o
-- `'texto'`
+Python acepta comillas dobles o simples.
 
 ### Concatenar textos
 
@@ -143,6 +153,8 @@ print("Hola " * 3)
 Hola Hola Hola
 ```
 
+---
+
 ## 4. bool (booleanos)
 
 Solo tienen dos valores:
@@ -153,12 +165,14 @@ Solo tienen dos valores:
 Observa que empiezan con mayúscula.
 
 **Correcto:**
+
 ```python
 True
 False
 ```
 
 **Incorrecto:**
+
 ```python
 true
 false
@@ -171,7 +185,7 @@ es_estudiante = True
 esta_lloviendo = False
 ```
 
-Se usan muchísimo en condiciones:
+Se usan mucho en condiciones:
 
 ```python
 edad = 20
@@ -182,6 +196,8 @@ print(edad >= 18)
 ```
 True
 ```
+
+---
 
 ## Cómo saber el tipo de una variable
 
@@ -203,11 +219,11 @@ print(type(nombre))
 <class 'str'>
 ```
 
+---
+
 ## Conversiones de tipos
 
-Aquí es donde los principiantes suelen cometer errores.
-
-Python permite convertir datos.
+Aquí es donde los principiantes suelen cometer errores. Python permite convertir datos entre tipos.
 
 ### int()
 
@@ -224,9 +240,8 @@ print(numero)
 25
 ```
 
-Ahora sí es un número.
+Verificación:
 
-**Verificación:**
 ```python
 print(type(numero))
 ```
@@ -288,6 +303,8 @@ print(bool(0))
 False
 ```
 
+---
+
 ## El error más común con input()
 
 Mira esto:
@@ -297,40 +314,20 @@ edad = input("Escribe tu edad: ")
 print(edad)
 ```
 
-Si escribes:
-
-```
-20
-```
-
-Python guarda:
+Si escribes `20`, Python guarda:
 
 ```
 "20"
 ```
 
-NO guarda:
-
-```
-20
-```
-
-Por eso ocurre este error:
+NO guarda `20` como número. Por eso ocurre este error:
 
 ```python
 edad = input("Edad: ")
 print(edad + 5)
 ```
 
-**Error.**
-
-Porque Python intenta hacer:
-
-```
-"20" + 5
-```
-
-y no sabe sumar texto con número.
+**Error.** Porque Python intenta hacer `"20" + 5` y no sabe sumar texto con número.
 
 **La solución:**
 
@@ -342,30 +339,10 @@ print(edad + 5)
 Ahora sí:
 
 ```
-20 + 5
-```
-
-**Resultado:**
-```
 25
 ```
 
-## Truco profesional
-
-En vez de:
-
-```python
-edad = input("Edad: ")
-edad = int(edad)
-```
-
-Se suele escribir:
-
-```python
-edad = int(input("Edad: "))
-```
-
-Más corto y elegante.
+---
 
 ## F-strings (muy importantes)
 
@@ -376,9 +353,7 @@ nombre = "Cristian"
 print("Hola " + nombre)
 ```
 
-Funciona.
-
-Pero hoy se usa:
+Funciona, pero hoy se usa:
 
 ```python
 nombre = "Cristian"
@@ -398,6 +373,8 @@ print(f"Me llamo {nombre} y tengo {edad} años.")
 Me llamo Cristian y tengo 20 años.
 ```
 
+---
+
 ## Funciones útiles para strings
 
 ### len()
@@ -414,47 +391,15 @@ print(len(nombre))
 8
 ```
 
-### upper()
-
-Mayúsculas.
+### upper() / lower() / capitalize()
 
 ```python
-nombre = "cristian"
-print(nombre.upper())
+print("cristian".upper())  # CRISTIAN
+print("CRISTIAN".lower())  # cristian
+print("cristian".capitalize())  # Cristian
 ```
 
-**Resultado:**
-```
-CRISTIAN
-```
-
-### lower()
-
-Minúsculas.
-
-```python
-nombre = "CRISTIAN"
-print(nombre.lower())
-```
-
-**Resultado:**
-```
-cristian
-```
-
-### capitalize()
-
-Primera letra en mayúscula.
-
-```python
-nombre = "cristian"
-print(nombre.capitalize())
-```
-
-**Resultado:**
-```
-Cristian
-```
+---
 
 ## Error típico de principiantes
 
@@ -464,15 +409,13 @@ Esto:
 nombre = Cristian
 ```
 
-genera error.
-
-Porque Python piensa que Cristian es una variable.
-
-Debe ser:
+genera error porque Python piensa que Cristian es una variable. Debe ser:
 
 ```python
 nombre = "Cristian"
 ```
+
+---
 
 ## Mini proyecto
 
@@ -493,6 +436,8 @@ print(f"Hola {nombre}")
 print(f"Tienes {edad} años")
 print(f"Mides {altura} metros")
 ```
+
+---
 
 ## Lo que debes dominar antes de avanzar
 
@@ -520,6 +465,8 @@ f"Texto {variable}"
 
 porque lo usarás prácticamente todos los días.
 
+---
+
 ## Desafío rápido
 
 Sin ejecutar el código, intenta decir qué mostrará:
@@ -543,3 +490,7 @@ print(len("Python"))
 <class 'int'>
 6
 ```
+
+---
+
+**🎉 ¡Listo! Ahora el archivo sigue el mismo formato y estilo que los demás: introducción, tabla de contenidos, secciones claras y ejemplos prácticos.**
