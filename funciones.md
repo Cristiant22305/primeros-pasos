@@ -1,0 +1,401 @@
+# FUNCIONES (VERSIÓN COMPLETA)
+
+## 📑 Tabla de Contenidos
+- [Introducción](#-introducción)
+- [¿Qué es una función?](#-qué-es-una-función)
+- [Crear y ejecutar funciones](#crear-y-ejecutar-funciones)
+- [Parámetros y múltiples parámetros](#parámetros-y-múltiples-parámetros)
+- [print() vs return](#print-vs-return)
+- [Funciones que no devuelven nada](#funciones-que-no-devuelven-nada)
+- [Valores por defecto](#valores-por-defecto)
+- [Argumentos nombrados](#argumentos-nombrados)
+- [Múltiples valores retornados](#múltiples-valores-retornados)
+- [Scope (alcance de variables)](#scope-alcance-de-variables)
+- [Funciones dentro de funciones](#funciones-dentro-de-funciones)
+- [*args y **kwargs](#args-y-kwargs)
+- [Funciones lambda](#funciones-lambda)
+- [map() y filter()](#map-y-filter)
+- [Docstrings](#docstrings)
+- [Type Hints](#type-hints)
+- [Funciones útiles incorporadas](#funciones-útiles-incorporadas)
+- [Errores comunes](#errores-comunes)
+- [Mini proyecto](#mini-proyecto)
+
+---
+
+## 📌 Introducción
+
+Si los bucles son una de las herramientas más importantes de Python, las funciones probablemente son la más importante. Muchas de las cosas que ya usaste (como `print()`, `len()`, `input()`) son funciones incorporadas. Ahora aprenderás a crear las tuyas.
+
+---
+
+## ❓ ¿Qué es una función?
+
+Una función es un bloque de código que realiza una tarea específica y que puedes reutilizar cuando quieras.
+
+Sin funciones:
+
+```python
+nombre = "Cristian"
+print(f"Hola {nombre}")
+
+nombre = "Ana"
+print(f"Hola {nombre}")
+
+nombre = "Luis"
+print(f"Hola {nombre}")
+```
+
+Con funciones:
+
+```python
+def saludar(nombre):
+    print(f"Hola {nombre}")
+
+saludar("Cristian")
+saludar("Ana")
+saludar("Luis")
+```
+
+Mucho más limpio.
+
+---
+
+## Crear y ejecutar funciones
+
+Sintaxis:
+
+```python
+def nombre_funcion():
+    codigo
+```
+
+Ejemplo:
+
+```python
+def saludar():
+    print("Hola")
+```
+
+Crear la función no la ejecuta. Debes llamarla:
+
+```python
+saludar()
+```
+
+Resultado:
+
+```
+Hola
+```
+
+---
+
+## Parámetros y múltiples parámetros
+
+Los parámetros son datos que recibe la función.
+
+```python
+def saludar(nombre):
+    print(f"Hola {nombre}")
+
+saludar("Cristian")
+```
+
+Múltiples parámetros:
+
+```python
+def sumar(a, b):
+    print(a + b)
+
+sumar(5, 3)  # 8
+```
+
+---
+
+## print() vs return
+
+`print()` muestra información. `return` devuelve información para que pueda usarse luego.
+
+Ejemplo con `print` (no reutilizable):
+
+```python
+def sumar(a, b):
+    print(a + b)
+
+sumar(10, 5)  # Imprime 15 pero no devuelve el valor
+```
+
+Ejemplo con `return`:
+
+```python
+def sumar(a, b):
+    return a + b
+
+resultado = sumar(10, 5)
+print(resultado)  # 15
+```
+
+¿Por qué `return` es mejor? Porque puedes reutilizar el resultado:
+
+```python
+resultado = sumar(10, 5)
+print(resultado * 2)  # 30
+```
+
+---
+
+## Funciones que no devuelven nada
+
+Si una función no usa `return`, Python devuelve `None`:
+
+```python
+def saludar():
+    print("Hola")
+
+resultado = saludar()
+print(resultado)  # Muestra: Hola \n None
+```
+
+`None` significa "no hay valor".
+
+---
+
+## Valores por defecto
+
+Puedes dar valores predeterminados a parámetros:
+
+```python
+def saludar(nombre="Invitado"):
+    print(f"Hola {nombre}")
+
+saludar()          # Hola Invitado
+saludar("Cristian")  # Hola Cristian
+```
+
+---
+
+## Argumentos nombrados
+
+Además de pasar por posición:
+
+```python
+saludar("Cristian")
+```
+
+Puedes pasar por nombre:
+
+```python
+saludar(nombre="Cristian")
+```
+
+Mejora la legibilidad.
+
+---
+
+## Múltiples valores retornados
+
+Python permite devolver varios valores (en realidad devuelve una tupla):
+
+```python
+def operaciones(a, b):
+    return a + b, a - b
+
+suma, resta = operaciones(10, 5)
+print(suma)  # 15
+print(resta) # 5
+```
+
+---
+
+## Scope (alcance de variables)
+
+Tema MUY importante.
+
+- Variable local: existe solo dentro de la función.
+
+```python
+def prueba():
+    numero = 10
+# print(numero)  # Error: numero no está definido aquí
+```
+
+- Variable global: definida fuera, accesible (lectura) dentro de la función:
+
+```python
+nombre = "Cristian"
+
+def mostrar():
+    print(nombre)
+```
+
+Buenas prácticas: evitar abusar de variables globales; pasar datos por parámetros.
+
+---
+
+## Funciones dentro de funciones
+
+Es posible definir funciones internas:
+
+```python
+def exterior():
+    def interior():
+        print("Hola")
+    interior()
+```
+
+No es muy común en un nivel básico, pero existe.
+
+---
+
+## *args y **kwargs
+
+`*args` permite recibir una cantidad variable de argumentos (tupla):
+
+```python
+def sumar(*args):
+    print(sum(args))
+
+sumar(1, 2, 3, 4, 5)  # 15
+```
+
+`**kwargs` permite recibir argumentos con nombre (diccionario):
+
+```python
+def mostrar(**kwargs):
+    print(kwargs)
+
+mostrar(nombre="Cristian", edad=20)  # {'nombre': 'Cristian', 'edad': 20}
+```
+
+---
+
+## Funciones lambda
+
+Funciones pequeñas de una sola línea:
+
+```python
+def cuadrado(x):
+    return x**2
+
+# Lambda equivalente
+cuadrado = lambda x: x**2
+print(cuadrado(5))  # 25
+```
+
+Otro ejemplo:
+
+```python
+sumar = lambda a, b: a + b
+```
+
+Usa `lambda` para funciones muy pequeñas y puntuales.
+
+---
+
+## map() y filter()
+
+`map()` aplica una función a todos los elementos:
+
+```python
+numeros = [1, 2, 3, 4]
+resultado = list(map(lambda x: x*2, numeros))
+print(resultado)  # [2, 4, 6, 8]
+```
+
+`filter()` filtra elementos según una función booleana:
+
+```python
+numeros = [1, 2, 3, 4, 5, 6]
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+print(pares)  # [2, 4, 6]
+```
+
+---
+
+## Docstrings
+
+Sirven para documentar funciones:
+
+```python
+def sumar(a, b):
+    """
+    Devuelve la suma de dos números.
+    """
+    return a + b
+```
+
+Muy importante en proyectos grandes.
+
+---
+
+## Type Hints
+
+Python moderno usa anotaciones de tipo:
+
+```python
+def sumar(a: int, b: int) -> int:
+    return a + b
+```
+
+Ayudan a entender qué tipo de dato espera la función.
+
+---
+
+## Funciones útiles incorporadas
+
+- `len()` — `len("Python")` → `6`
+- `sum()` — `sum([1,2,3])` → `6`
+- `max()` — `max([4,8,2])` → `8`
+- `min()` — `min([4,8,2])` → `2`
+- `sorted()` — `sorted([4,1,8,2])` → `[1,2,4,8]`
+
+---
+
+## Errores comunes
+
+- Olvidar llamar la función:
+
+```python
+def saludar():
+    print("Hola")
+# falta saludar()
+```
+
+- Confundir `print` con `return`.
+
+- Parámetros incorrectos al llamar una función:
+
+```python
+def sumar(a, b):
+    return a + b
+
+sumar(5)  # Error: falta un argumento
+```
+
+---
+
+## Mini proyecto: Calculadora simple
+
+```python
+def sumar(a, b):
+    return a + b
+
+def restar(a, b):
+    return a - b
+
+def multiplicar(a, b):
+    return a * b
+
+def dividir(a, b):
+    return a / b
+
+print(sumar(10, 5))
+print(restar(10, 5))
+print(multiplicar(10, 5))
+print(dividir(10, 5))
+```
+
+---
+
+**Listo.** Añadí el archivo con la versión completa sobre funciones: explicación, ejemplos, buenas prácticas y mini proyecto.
