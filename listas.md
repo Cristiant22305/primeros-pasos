@@ -1,0 +1,397 @@
+# LISTAS (VERSIÓN COMPLETA)
+
+## 📑 Tabla de Contenidos
+- [Introducción](#-introducción)
+- [¿Qué es una lista?](#-qué-es-una-lista)
+- [Por qué usar listas](#por-qué-usar-listas)
+- [Tipos de datos en listas](#las-listas-pueden-guardar-cualquier-tipo)
+- [Índices y acceso](#índices-y-acceso)
+- [Modificar elementos](#modificar-elementos)
+- [Longitud y recorrer listas](#longitud-y-recorrer-listas)
+- [enumerate()](#enumerate)
+- [Operador in](#operador-in)
+- [Agregar elementos: append, insert, extend](#agregar-elementos)
+- [Eliminar elementos: remove, pop, clear](#eliminar-elementos)
+- [Ordenar: sort, sorted, reverse](#ordenar-listas)
+- [count e index](#count-e-index)
+- [Copias de listas (importante)](#copias-de-listas)
+- [Slicing en listas](#slicing-en-listas)
+- [Listas anidadas](#listas-anidadas)
+- [Funciones útiles](#funciones-útiles)
+- [Comprensión de listas](#comprensión-de-listas)
+- [zip()](#zip)
+- [Trucos profesionales](#trucos-profesionales)
+- [Errores comunes](#errores-comunes)
+- [Mini proyecto](#mini-proyecto)
+
+---
+
+## 📌 Introducción
+
+Si los strings son una de las estructuras más usadas, las listas son probablemente la estructura de datos más importante de Python. Las verás constantemente en automatización, ciencia de datos, machine learning, desarrollo web y más.
+
+---
+
+## ❓ ¿Qué es una lista?
+
+Una lista es una colección ordenada de elementos.
+
+```python
+frutas = ["manzana", "pera", "uva"]
+```
+
+Visualmente:
+
+[
+ "manzana",
+ "pera",
+ "uva"
+]
+
+---
+
+## Por qué usar listas
+
+Sin listas:
+
+```python
+fruta1 = "manzana"
+fruta2 = "pera"
+fruta3 = "uva"
+```
+
+Con listas:
+
+```python
+frutas = ["manzana", "pera", "uva"]
+```
+
+Mucho más organizado.
+
+---
+
+## Las listas pueden guardar cualquier tipo
+
+```python
+datos = [10, 3.14, "Cristian", True]
+```
+
+Aunque normalmente se intenta guardar datos del mismo tipo por claridad.
+
+---
+
+## ÍNDICES y acceso
+
+Igual que en strings:
+
+```python
+frutas = ["manzana", "pera", "uva"]
+print(frutas[0])  # manzana
+print(frutas[-1]) # uva (último elemento)
+```
+
+---
+
+## Modificar elementos
+
+A diferencia de los strings, las listas son mutables:
+
+```python
+frutas = ["manzana", "pera", "uva"]
+frutas[1] = "mango"
+# ['manzana', 'mango', 'uva']
+```
+
+---
+
+## Longitud y recorrer listas
+
+```python
+len(frutas)  # 3
+
+for fruta in frutas:
+    print(fruta)
+```
+
+Resultado:
+
+```
+manzana
+pera
+uva
+```
+
+---
+
+## enumerate()
+
+Forma profesional de obtener índice y valor:
+
+```python
+for indice, fruta in enumerate(frutas):
+    print(indice, fruta)
+```
+
+Resultado:
+
+```
+0 manzana
+1 pera
+2 uva
+```
+
+---
+
+## Operador IN
+
+Muy utilizado para verificar existencia:
+
+```python
+if "pera" in frutas:
+    print("Existe")
+```
+
+---
+
+## Agregar elementos
+
+- append(): añade al final
+
+```python
+frutas = ["manzana", "pera"]
+frutas.append("uva")
+# ['manzana', 'pera', 'uva']
+```
+
+- insert(pos, valor): inserta en posición específica
+
+```python
+frutas.insert(1, "mango")
+# ['manzana','mango','pera']
+```
+
+- extend(lista): une otra lista
+
+```python
+a = [1,2]
+b = [3,4]
+a.extend(b)
+# [1,2,3,4]
+```
+
+---
+
+## Eliminar elementos
+
+- remove(valor): elimina por valor
+
+```python
+frutas.remove("pera")
+# ['manzana','uva']
+```
+
+- pop(indice): elimina por posición y devuelve el valor
+
+```python
+eliminado = frutas.pop(1)
+```
+
+Si no pasas índice, `pop()` elimina y devuelve el último.
+
+- clear(): vacía la lista
+
+```python
+frutas.clear()
+# []
+```
+
+---
+
+## Ordenar listas
+
+- sort(): ordena la lista en sitio
+
+```python
+numeros = [5,2,8,1]
+numeros.sort()
+# [1,2,5,8]
+```
+
+- sorted(): devuelve una nueva lista ordenada
+
+```python
+nuevo = sorted(numeros)
+```
+
+- reverse(): invierte el orden
+
+```python
+frutas.reverse()
+# ['uva','pera','manzana']
+```
+
+Para orden descendente:
+
+```python
+numeros.sort(reverse=True)
+# [8,5,2,1]
+```
+
+---
+
+## count() e index()
+
+- count(valor): cuenta ocurrencias
+
+```python
+numeros = [1,2,2,2,3]
+numeros.count(2)  # 3
+```
+
+- index(valor): devuelve la primera posición
+
+```python
+frutas.index("pera")  # 1
+```
+
+---
+
+## COPIAS DE LISTAS (MUY IMPORTANTE)
+
+Incorrecto:
+
+```python
+a = [1,2,3]
+b = a
+b.append(4)
+# a ahora también cambia -> [1,2,3,4]
+```
+
+Eso pasa porque ambas variables apuntan al mismo objeto. Para copiar correctamente:
+
+```python
+b = a.copy()
+# o
+b = a[:]
+```
+
+---
+
+## SLICING EN LISTAS
+
+Igual que en strings:
+
+```python
+numeros = [0,1,2,3,4,5]
+numeros[:3]   # [0,1,2]
+numeros[2:]   # [2,3,4,5]
+numeros[::2]  # [0,2,4]
+numeros[::-1] # [5,4,3,2,1,0]
+```
+
+---
+
+## LISTAS ANIDADAS
+
+Listas dentro de listas (matrices):
+
+```python
+matriz = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+
+matriz[1][2]  # 6
+```
+
+Muy usado en videojuegos, matrices, IA, visión artificial.
+
+---
+
+## FUNCIONES ÚTILES
+
+- sum([1,2,3])  -> 6
+- max([1,7,3])  -> 7
+- min([1,7,3])  -> 1
+
+Usa estas funciones en lugar de implementar tú mismo.
+
+---
+
+## COMPRENSIÓN DE LISTAS
+
+Muy Pythonico:
+
+```python
+cuadrados = [i**2 for i in range(5)]
+# [0,1,4,9,16]
+
+pares = [i for i in range(20) if i % 2 == 0]
+# [0,2,4,...,18]
+```
+
+Aparece muchísimo en proyectos reales.
+
+---
+
+## ZIP()
+
+Combina listas elemento a elemento:
+
+```python
+nombres = ["Ana","Luis"]
+edades = [20,25]
+for nombre, edad in zip(nombres, edades):
+    print(nombre, edad)
+```
+
+Resultado:
+
+```
+Ana 20
+Luis 25
+```
+
+---
+
+## TRUCOS PROFESIONALES
+
+- Lista vacía: `numeros = []`
+- Verificar si tiene elementos: `if numeros:` en vez de `if len(numeros) > 0:`
+- Obtener máximo: `max(numeros)` en vez de hacer manualmente.
+- Obtener suma: `sum(numeros)`.
+
+---
+
+## ERRORES COMUNES
+
+- IndexError: acceder a `frutas[10]` si no existe.
+- ValueError: `frutas.remove("mango")` cuando no existe.
+- Confundir `append()` con `extend()`:
+
+```python
+lista = [1,2,3]
+lista.append([4,5])   # [1,2,3,[4,5]]
+lista.extend([4,5])   # [1,2,3,4,5]
+```
+
+---
+
+## MINI PROYECTO: Promedio de notas
+
+```python
+notas = [4.5, 3.8, 4.2, 5.0]
+promedio = sum(notas) / len(notas)
+print(f"Promedio: {promedio}")
+```
+
+Resultado:
+
+```
+Promedio: 4.375
+```
+
+---
+
+**Listo.** Añadí el archivo listas.md con la versión completa sobre listas en Python: explicaciones, ejemplos, trucos y mini proyecto.
